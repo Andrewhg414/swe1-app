@@ -1,4 +1,30 @@
-language: ruby
-rvm:
- - 2.2
- - jruby
+language: python
+
+python:
+  - 3.9.1
+
+install:
+  - pip install -r requirements.txt
+
+before_script:
+  - python manage.py migrate
+
+script:
+  - black --check
+  - flake8 -- max-line-length 91
+  - coverage run --source=mysite_swe1_app,polls manage.py test
+
+after_script:
+  - coveralls
+
+deploy:
+  skip_cleanup: true
+  provider: elasticbeanstalk
+  access_key_id: $AWS_EB_ACCESS_KEY
+  secret_access_key: $AWS_EB_SECRET_ACCESS_KEY
+  region: "us-west-2"
+  app: "mysite"
+  env: "my-env"
+  bucket_name: $AWS_EB_BUCKET_NAME
+  on:
+    branch: main
