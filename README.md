@@ -9,3 +9,4 @@ Travis Badge:
 
 Coverage Report:
 [![Coverage Status](https://coveralls.io/repos/github/Andrewhg414/swe1-app/badge.svg?branch=develop)](https://coveralls.io/github/Andrewhg414/swe1-app?branch=develop)
+
